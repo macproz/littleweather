@@ -97,27 +97,27 @@ public class LitterWeatherDB {
 
 
 
-    public void saveCountry(Country country){
-        if(country != null){
+    public void saveCountry(County county){
+        if(county != null){
             ContentValues values = new ContentValues();
-            values.put("country_name", country.getCountryName());
-            values.put("country_code", country.getCountryCode());
-            values.put("city_id", country.getCityId());
-            db.insert("Country",null, values);
+            values.put("county_name", county.getCountyName());
+            values.put("county_code", county.getCountyCode());
+            values.put("city_id", county.getCityId());
+            db.insert("County",null, values);
         }
     }
 
 
-    public List<Country> loadCountries(int cityId) {
-        List<Country> list = new ArrayList<Country>();
-        Cursor cursor = db.query("Country", null, "city_id=?", new String[]{String.valueOf(cityId)}, null, null, null);
+    public List<County> loadCountries(int cityId) {
+        List<County> list = new ArrayList<County>();
+        Cursor cursor = db.query("County", null, "city_id=?", new String[]{String.valueOf(cityId)}, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Country country = new Country();
+                County country = new County();
                 country.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                country.setCountryCode(cursor.getString(cursor.getColumnIndex("country_code")));
-                country.setCountryName(cursor.getString(cursor.getColumnIndex("country_name")));
+                country.setCountyCode(cursor.getString(cursor.getColumnIndex("county_code")));
+                country.setCountyName(cursor.getString(cursor.getColumnIndex("county_name")));
 
                 country.setCityId(cityId);
                 list.add(country);
