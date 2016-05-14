@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jun.littleweather.R;
+import com.example.jun.littleweather.service.AutoUpdateService;
 import com.example.jun.littleweather.util.HttpCallbackListener;
 import com.example.jun.littleweather.util.HttpUtil;
 import com.example.jun.littleweather.util.Utility;
@@ -120,8 +121,13 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         weatherDespText.setText(prefs.getString("weather_desp", ""));
         currentDateText.setText(prefs.getString("current_date", ""));
         publishText.setText("今天" + prefs.getString("publish_time", "") + "发布");
+
+        currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     @Override
